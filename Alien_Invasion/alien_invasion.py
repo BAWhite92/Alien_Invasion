@@ -1,8 +1,7 @@
 import sys
-
 import pygame
-
 from settings import Settings
+from armour import Armour 
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior"""
@@ -17,19 +16,26 @@ class AlienInvasion:
         
         pygame.display.set_caption("AlienInvasion")
 
+        self.armour = Armour(self)
+
     def run_game(self):
         """Start the main loop for the game"""
         while True:
-            #watch for keyboard or mouse events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
 
             #redraw the screen during each pass through loop
             self.screen.fill(self.settings.bg_colour)
+            self.armour.blitme()
 
             #make most recent drawn screen visible.
             pygame.display.flip()
+
+    def _check_events(self):
+        """respond to keyboard and mouse events"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
 
 if __name__ == '__main__':
     #make a game instance and run the game.
