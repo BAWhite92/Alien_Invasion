@@ -10,6 +10,7 @@ class Settings:
 
         #armour settings
         self.armour_speed = 2.5
+        self.armour_limit = 3
 
         #bullet settings
         self.bullet_speed = 3.0
@@ -19,7 +20,7 @@ class Settings:
         self.bullets_allowed = 8
 
         #alien settings
-        self.alien_speed = 1.0
-        self.fleet_drop_speed = 15
-        #fleet_direction fo 1 represents right; -1 represents left
+        self.alien_speed = 3.0
+        self.fleet_drop_speed = 100
+        #fleet_direction of 1 represents right; -1 represents left
         self.fleet_direction = 1
