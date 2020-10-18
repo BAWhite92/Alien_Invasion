@@ -9,7 +9,7 @@ class Settings:
         self.bg_colour = (96, 96, 96)
 
         #armour settings
-        self.armour_limit = 2
+        self.armour_limit = 3
 
         #bullet settings
         self.bullet_width = 3

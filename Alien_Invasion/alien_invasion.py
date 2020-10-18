@@ -76,6 +76,8 @@ class AlienInvasion:
             self.settings.initialise_dynamic_settings()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_armour()
 
             #get rid of any remaining aliens and bullets
             self.aliens.empty() 
@@ -142,6 +144,9 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            #increase level
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _create_fleet(self):
         """create a fleet of aliens"""
@@ -202,7 +207,7 @@ class AlienInvasion:
         if self.stats.armour_left > 0:
             #decrement armour health
             self.stats.armour_left -= 1 
-            print(f"left is {self.stats.armour_left}")       
+            self.sb.prep_armour()     
 
             #get rid of remaining aliens and bullets
             self.aliens.empty()

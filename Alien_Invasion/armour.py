@@ -1,10 +1,12 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Armour:
+class Armour(Sprite):
     """a class to manage the defence vehicle"""
 
     def __init__(self, ai_game):
         """Initialise the armour and set its start position"""
+        super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
         self.settings = ai_game.settings

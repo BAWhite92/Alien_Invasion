@@ -1,10 +1,13 @@
 import pygame.font
+from pygame.sprite import Group
+from armour import Armour
 
 class Scoreboard:
     """A class to report scoring information"""
 
     def __init__(self, ai_game):
         """Initialise scoring attribs"""
+        self.ai_game = ai_game
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
@@ -16,6 +19,8 @@ class Scoreboard:
         #prepare initial score images
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
+        self.prep_armour()
 
     def prep_score(self):
         """Turn the score into a rendered image"""
@@ -48,6 +53,28 @@ class Scoreboard:
             self.prep_high_score()
 
     def show_score(self):
-        """draw score to screen"""
+        """draw score, level and ships to screen"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
+        self.armours.draw(self.screen)
+
+    def prep_level(self):
+        """Turn level into a rendered image"""
+        level_str = str(self.stats.level)
+        self.level_image = self.font.render(level_str, True,
+            self.text_colour, self.settings.bg_colour)
+
+        #place level underneath score
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.screen_rect.right - 20
+        self.level_rect.top = self.score_rect.bottom + 10
+
+    def prep_armour(self):
+        """How many lives are left"""
+        self.armours = Group()
+        for armour_number in range(self.stats.armour_left):
+            armour = Armour(self.ai_game)
+            armour.rect.x = 10 + armour_number * armour.rect.width
+            armour.rect.y = 10
+            self.armours.add(armour)

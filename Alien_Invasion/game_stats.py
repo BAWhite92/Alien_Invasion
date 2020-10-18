@@ -15,3 +15,4 @@ class GameStats:
         """Intialise statistics that can change during game"""
         self.armour_left = self.settings.armour_limit
         self.score = 0
+        self.level = 1
